@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Crear Asignaturas</title>
+	<meta name="description" content="Herramienta para la creacion de Asignaturas.">
+	<meta name="author" content="@monkeyandres">
+</head>
+<body>
+	<div class="container">
+		{% if form %}
+			<a href="/setup">Volver Atras</a>
+
+			<h3>Crear {{ tipoFormulario }}</h3>
+			<form method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" name="enviar" value="Crear">
+			</form>
+		{% else %}
+			<h3>Configura alexio</h3>
+			<ol>
+				<li><a href="crearAsignaturas">Crear Asignaturas</a></li>
+				<li><a href="crearProfesores">Crear Profesores</a></li>
+				<li><a href="crearClases">Crear Clases</a></li>
+				<li><a href="crearAlumnos">Crear Alumnos</a></li>
+			</ol>
+		{% endif %}
+
+
+		{% if todosUsuarios %}
+			<h3>{{ tipoUsuario }} Creados</h3>
+			<ul>
+				{% for usuario in todosUsuarios %}
+					<li>{{ usuario.nombre }} {{ usuario.apellido }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+
+		{% if todasAsignaturas %}
+			<h3>Asignaturas Creadas</h3>
+			<ul>
+				{% for asignatura in todasAsignaturas %}
+					<li>Asignatura: {{ asignatura.concepto }} - Horas Semanales: {{ asignatura.horasPorSemana }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+
+</body>
+</html>
