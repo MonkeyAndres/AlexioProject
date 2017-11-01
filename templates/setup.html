@@ -4,50 +4,114 @@
 <html lang="es">
 <head>
 	<meta charset="utf-8">
-	<title>Crear Asignaturas</title>
+	<title>Configura Alexio</title>
 	<meta name="description" content="Herramienta para la creacion de Asignaturas.">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="{% static "css/setup.css" %}">
 	<meta name="author" content="@monkeyandres">
 </head>
 <body>
-	<div class="container">
-		{% if form %}
-			<a href="/setup">Volver Atras</a>
+	{% if form %}
+		<header id="pageTitle">
+	        <div>
+	            <a class="mdi mdi-arrow-left mdi-24px" id="backBtn" href="/setup"></a>
+	            <h2>Creacion {{ tipoFormulario }}</h2>
+	        </div>
+	    </header>
 
-			<h3>Crear {{ tipoFormulario }}</h3>
-			<form method="POST">
+	    <div id="container">
+	    	<h3>Formulario creacion.</h3>
+			<form method="post" id="creationForm">
 				{% csrf_token %}
 				{{ form.as_p }}
-				<input type="submit" name="enviar" value="Crear">
+				<input type="submit" value="Crear" />
 			</form>
-		{% else %}
-			<h3>Configura alexio</h3>
-			<ol>
-				<li><a href="crearAsignaturas">Crear Asignaturas</a></li>
-				<li><a href="crearProfesores">Crear Profesores</a></li>
-				<li><a href="crearClases">Crear Clases</a></li>
-				<li><a href="crearAlumnos">Crear Alumnos</a></li>
-			</ol>
-		{% endif %}
 
+	    	<br>
+	    	<h3>{{ tipoFormulario }} disponibles.</h3>
+			<table style="width:100%">
+				{% if tipoFormulario == "Asignaturas" %}
+					<tr>
+						<th>Concepto</th> 
+						<th>Horas Semanales</th>
+					</tr>
+					
+					{% for asignatura in todasAsignaturas %}
+						<tr>
+							<td>{{ asignatura.concepto }}</td> 
+							<td>{{ asignatura.horasPorSemana }}</td>
+						</tr>
+					{% endfor %}
 
-		{% if todosUsuarios %}
-			<h3>{{ tipoUsuario }} Creados</h3>
-			<ul>
-				{% for usuario in todosUsuarios %}
-					<li>{{ usuario.nombre }} {{ usuario.apellido }}</li>
-				{% endfor %}
-			</ul>
-		{% endif %}
+				{% endif %}
 
-		{% if todasAsignaturas %}
-			<h3>Asignaturas Creadas</h3>
-			<ul>
-				{% for asignatura in todasAsignaturas %}
-					<li>Asignatura: {{ asignatura.concepto }} - Horas Semanales: {{ asignatura.horasPorSemana }}</li>
-				{% endfor %}
-			</ul>
-		{% endif %}
-	</div>
+				{% if tipoFormulario == "Profesores" %}
+					<tr>
+						<th>Nombre</th>
+						<th>Apellidos</th> 
+						<th>A.Principal</th>
+						<th>A.Secundaria</th>
+					</tr>
+					
+					{% for profesor in todosProfesores%}
+						<tr>
+							<td>{{ profesor.nombre }}</td>
+							<td>{{ profesor.apellido }}</td> 
+							<td>{{ profesor.asignaturaPrincipal }}</td>
+							<td>{{ profesor.asignaturaSecundaria }}</td>
+						</tr>
+					{% endfor %}
 
+				{% endif %}
+
+				{% if tipoFormulario == "Clases" %}
+					<tr>
+						<th>Curso</th> 
+						<th>Letra</th>
+						<th>GradoEducacion</th>
+						<th>Tutor</th>
+					</tr>
+					
+					{% for clase in todasClases %}
+						<tr>
+							<td>{{ clase.curso }}</td> 
+							<td>{{ clase.letra }}</td>
+							<td>{{ clase.gradoEducacion }}</td>
+							<th>{{ clase.tutor }}</th>
+						</tr>
+					{% endfor %}
+
+				{% endif %}
+
+				{% if tipoFormulario == "Alumnos" %}
+					<tr>
+						<th>Nombre</th> 
+						<th>Apellido</th>
+						<th>Edad</th>
+						<th>Clase</th>
+					</tr>
+					
+					{% for alumno in todosAlumnos %}
+						<tr>
+							<td>{{ alumno.nombre }}</td> 
+							<td>{{ alumno.apellido }}</td>
+							<td>{{ alumno.edad }}</td>
+							<th>{{ alumno.clase }}</th>
+						</tr>
+					{% endfor %}
+
+				{% endif %}
+			</table>
+	    </div>
+	{% else %}
+		<h2 id="pageTitle">Configura Alexio</h2>
+	    <ol id="configSteps">
+	        <li>1. <a href="crearAsignaturas">Crear Asignaturas</a></li>
+	        <li>2. <a href="crearProfesores">Crear Profesores</a></li>
+	        <li>3. <a href="crearClases">Crear Clases</a></li>
+	        <li>4. <a href="crearAlumnos">Crear Alumnos</a></li>
+	    </ol>
+	{% endif %}
 </body>
 </html>

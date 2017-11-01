@@ -36,7 +36,7 @@ def crearContextoAsignaturas():
     context = {
         'form': formAsignatura,
         'todasAsignaturas': todasAsignaturas,
-        'tipoFormulario': 'Profesores'
+        'tipoFormulario': 'Asignaturas'
     }
     return context
 
@@ -113,7 +113,7 @@ def crearContextoAlumno():
     context = {
         'form': formAlumno,
         'todosAlumnos': todosAlumnos,
-        'tipoUsuario': 'Alumnos'
+        'tipoFormulario': 'Alumnos'
     }
     return context
 
