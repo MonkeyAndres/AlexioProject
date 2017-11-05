@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     border: 0;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     outline: none;
     text-decoration: none;
@@ -37,6 +38,10 @@ a.mdi{color: #fafafa}
 #pageTitle>div{
     width: 90%;
     max-width: 700px;
+    
+    display: -webkit-box;
+    
+    display: -ms-flexbox;
     
     display: flex;
     margin: 1em auto;
@@ -78,6 +83,15 @@ a.mdi{color: #fafafa}
     -webkit-margin-end: 0px;
 }
 
+#creationForm>p>label{
+    display: block;
+    width: 100%;
+}
+
+input, select{
+    margin: 0.7em 0;
+}
+
 input[type=submit]{
     background-color: #FF5252;
     color: #fafafa;
@@ -92,21 +106,26 @@ input[type=submit]:hover{
 
 input[type=file]{
     width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 #creationForm>p>input, #creationForm>p>select{
     border: 1px solid rgba(0,0,0,.3);
     padding: 0.4em;
-    margin-left: 1em;
 }
 
 table {
     table-layout: fixed;
     width: 100%;
     text-align: center;
+}
+
+#pageTitle>div>a{transition: all 400ms}
+
+#pageTitle>div>a:hover{
+    color: rgba(0,0,0,.2);
 }

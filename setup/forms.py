@@ -19,6 +19,7 @@ class ProfesorForm(forms.ModelForm):
         model = Profesor
         exclude = ['username', 'password', 'token']
         labels = {
+            'foto': _('Foto: Pulse aqui para añadir la foto.'),
             'asignaturaPrincipal': _('Asignatura Principal'),
             'asignaturaSecundaria': _('Asignatura Secundaria (no requerida)'),
         }
@@ -32,7 +33,7 @@ class ClaseForm(forms.ModelForm):
             'gradoEducacion': _('Grado Educacion'),
             'curso': _('Año Curso (EJ: 1, 2)'),
             'letra': _('Letra Curso (EJ: A, B'),
-            'asignaturas': _('Asignaturas que cursa la clase'),
+            'asignaturas': _('Asignaturas que cursa la clase (selecciona varias manteniendo CTRL)'),
         }
 
 
@@ -40,3 +41,6 @@ class AlumnoForm(forms.ModelForm):
     class Meta:
         model = Alumno
         exclude = ['username', 'password', 'token']
+        labels = {
+            'foto': _('Foto: Pulse aqui para añadir la foto.'),
+        }
