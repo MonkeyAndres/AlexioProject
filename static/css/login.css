@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif´;
+}
+
+body{
+    background-color: #e2e1e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container{
+    width: 95%;
+    max-width: 400px;
+    background-color: #fafafa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 2px;
+}
+
+.container>h1{
+    background-color: #F44336;
+    padding: 0.5em;
+    color: #fafafa;
+}
+
+.container>form{
+    padding: 1em;
+}
+
+.container>form>input[type="text"], .container>form>input[type="password"]{
+    padding: 0.4em;
+    margin-bottom: 1em;
+    border-bottom: 1px black solid;
+    outline: none;
+    background-color: transparent;
+}
+
+.container>form>input[type="submit"]{
+    background-color: #F44336;
+    padding: 0.5em 1em;
+    color: #fafafa;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.container>form>input[type="submit"]:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#error{
+    padding: 1em;
+    padding-bottom: 0;
+    color: red;
+}
