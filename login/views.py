@@ -14,10 +14,42 @@ def loginMain(request):
         response = makeLogin(userObject, userData.get('password'), request)
         return response
     else:
-        if 'token' in request.COOKIES:
-            return redirect("/")
+        if 'token' in request.session:
+            token = request.session["token"]
+            response = comprobarToken(token, request)
+            return response
         else:
             return render(request, "login.html")
+
+
+def comprobarToken(token, req):
+    if isTokenAlumno(token) or isTokenProfesor(token):
+        response = redirect("/")
+    else:
+        borrarCokieToken(req)
+        response = redirect("/login")
+    return response
+
+
+def borrarCokieToken(req):
+    del req.session["token"]
+    return True
+
+
+def isTokenAlumno(token):
+    try:
+        Alumno.objects.get(token=token)
+        return True
+    except Exception:
+        return False
+
+
+def isTokenProfesor(token):
+    try:
+        Profesor.objects.get(token=token)
+        return True
+    except Exception:
+        return False
 
 
 def makeLogin(userObject, password, request):
@@ -81,9 +113,9 @@ def comprobarDatos(userObject, password):
 
 
 def setTokenCookie(userObject, request):
-    if 'token' not in request.COOKIES:
+    if 'token' not in request.session:
+        request.session["token"] = userObject.token
         response = redirect('/')
-        response.set_cookie('token', userObject.token)
         return response
     else:
         return redirect('/')
