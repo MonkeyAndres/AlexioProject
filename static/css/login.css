@@ -7,7 +7,7 @@
 }
 
 body{
-    background-color: #e2e1e0;
+    background-image: url("../img/schoolBG.jpg");
     display: flex;
     justify-content: center;
     align-items: center;

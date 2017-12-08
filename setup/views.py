@@ -122,21 +122,20 @@ def crearClasesView(request):   # VISTA
     if request.method == 'POST':
         datosFormulario = request.POST
 
-        formRelleno = ClaseForm(datosFormulario)
+        formRelleno = CursoForm(datosFormulario)
 
         if formRelleno.is_valid():
             nuevaClase = formRelleno.save()
-            print(nuevaClase.asignaturas.all())
             nuevaClase.save()
 
             return HttpResponseRedirect('/setup/crearClases')
 
-    formClase = ClaseForm()
-    todasClases = Clase.objects.all().order_by('id')
+    formClase = CursoForm()
+    todasClases = Curso.objects.all().order_by('id')
     context = {
         'form': formClase,
         'todasClases': todasClases,
-        'tipoFormulario': 'Clases'
+        'tipoFormulario': 'Cursos'
     }
 
     return render(request, setupTemplate, context)

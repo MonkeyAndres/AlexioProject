@@ -35,12 +35,16 @@
 					<tr>
 						<th>Concepto</th> 
 						<th>Horas Semanales</th>
+						<th>Profesor</th>
+						<th>Curso</th>
 					</tr>
 					
 					{% for asignatura in todasAsignaturas %}
 						<tr>
 							<td>{{ asignatura.concepto }}</td> 
 							<td>{{ asignatura.horasPorSemana }}</td>
+							<td>{{ asignatura.profesor }}</td>
+							<td>{{ asignatura.curso }}</td>
 						</tr>
 					{% endfor %}
 
@@ -50,22 +54,18 @@
 					<tr>
 						<th>Nombre</th>
 						<th>Apellidos</th> 
-						<th>A.Principal</th>
-						<th>A.Secundaria</th>
 					</tr>
 					
 					{% for profesor in todosProfesores%}
 						<tr>
 							<td>{{ profesor.nombre }}</td>
 							<td>{{ profesor.apellido }}</td> 
-							<td>{{ profesor.asignaturaPrincipal }}</td>
-							<td>{{ profesor.asignaturaSecundaria }}</td>
 						</tr>
 					{% endfor %}
 
 				{% endif %}
 
-				{% if tipoFormulario == "Clases" %}
+				{% if tipoFormulario == "Cursos" %}
 					<tr>
 						<th>Curso</th> 
 						<th>Letra</th>
@@ -75,7 +75,7 @@
 					
 					{% for clase in todasClases %}
 						<tr>
-							<td>{{ clase.curso }}</td> 
+							<td>{{ clase.anio }}</td> 
 							<td>{{ clase.letra }}</td>
 							<td>{{ clase.gradoEducacion }}</td>
 							<th>{{ clase.tutor }}</th>
@@ -112,9 +112,9 @@
 	        </div>
 	    </header>
 	    <ol id="configSteps">
-	        <li>1. <a href="crearAsignaturas">Crear Asignaturas</a></li>
-	        <li>2. <a href="crearProfesores">Crear Profesores</a></li>
-	        <li>3. <a href="crearClases">Crear Clases</a></li>
+	        <li>1. <a href="crearProfesores">Crear Profesores</a></li>
+	        <li>2. <a href="crearClases">Crear Clases</a></li>
+	        <li>3. <a href="crearAsignaturas">Crear Asignaturas</a></li>
 	        <li>4. <a href="crearAlumnos">Crear Alumnos</a></li>
 	    </ol>
 	{% endif %}

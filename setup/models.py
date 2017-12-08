@@ -3,20 +3,8 @@
 from django.db import models
 
 
-class Asignatura(models.Model):
-    concepto = models.CharField(max_length=50)
-    horasPorSemana = models.DecimalField(max_digits=2, decimal_places=0)
-
-    class Meta:
-        verbose_name = "Asignatura"
-        verbose_name_plural = "Asignaturas"
-
-    def __str__(self):
-        return self.concepto
-
-
 class Profesor(models.Model):
-    foto = models.ImageField(blank=True)
+    foto = models.ImageField(blank=True, upload_to="static/profesorPhotos/")
 
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -26,17 +14,6 @@ class Profesor(models.Model):
     password = models.CharField(max_length=20)
     token = models.CharField(max_length=40)
 
-    asignaturaPrincipal = models.ForeignKey(
-        Asignatura,
-        related_name="asignaturaPrincipal"
-    )
-    asignaturaSecundaria = models.ForeignKey(
-        Asignatura,
-        blank=True,
-        null=True,
-        related_name="asignaturaSecundaria"
-    )
-
     class Meta:
         verbose_name = "Profesor"
         verbose_name_plural = "Profesores"
@@ -45,7 +22,7 @@ class Profesor(models.Model):
         return self.nombre + " " + self.apellido
 
 
-class Clase(models.Model):
+class Curso(models.Model):
     gradoEducacionChoices = (
         ('INF', 'Infantil'),
         ('PRM', 'Primaria'),
@@ -58,23 +35,44 @@ class Clase(models.Model):
         choices=gradoEducacionChoices
     )
 
-    curso = models.DecimalField(max_digits=1, decimal_places=0)
+    anio = models.DecimalField(max_digits=1, decimal_places=0)
     letra = models.CharField(max_length=1, blank=True)
 
     tutor = models.OneToOneField(Profesor)
-    asignaturas = models.ManyToManyField(Asignatura)
 
     class Meta:
         verbose_name = "Clase"
         verbose_name_plural = "Clases"
 
     def __str__(self):
-        cursoInt = str(self.curso)
-        return cursoInt + "º" + self.letra
+        anioInt = str(self.anio)
+        return anioInt + "º" + self.letra
+
+
+class Asignatura(models.Model):
+    concepto = models.CharField(max_length=50)
+    horasPorSemana = models.DecimalField(max_digits=2, decimal_places=0)
+    profesor = models.ForeignKey(
+        Profesor,
+        related_name="profesor",
+        default=True
+    )
+    curso = models.ForeignKey(
+        Curso,
+        related_name="clase",
+        default=True
+    )
+
+    class Meta:
+        verbose_name = "Asignatura"
+        verbose_name_plural = "Asignaturas"
+
+    def __str__(self):
+        return self.concepto
 
 
 class Alumno(models.Model):
-    foto = models.ImageField(blank=True)
+    foto = models.ImageField(blank=True, upload_to="static/alumnoPhotos/")
 
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -85,7 +83,7 @@ class Alumno(models.Model):
     password = models.CharField(max_length=20)
     token = models.CharField(max_length=40)
 
-    clase = models.ForeignKey(Clase)
+    curso = models.ForeignKey(Curso, default=True)
 
     class Meta:
         verbose_name = "Alumno"

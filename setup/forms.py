@@ -11,6 +11,8 @@ class AsignaturaForm(forms.ModelForm):
         labels = {
             'concepto': _('Nombre Asignatura'),
             'horasPorSemana': _('Horas semanales asignatura'),
+            'profesor': _('Profesor'),
+            'curso': _('Curso'),
         }
 
 
@@ -20,20 +22,17 @@ class ProfesorForm(forms.ModelForm):
         exclude = ['username', 'password', 'token']
         labels = {
             'foto': _('Foto: Pulse aqui para añadir la foto.'),
-            'asignaturaPrincipal': _('Asignatura Principal'),
-            'asignaturaSecundaria': _('Asignatura Secundaria (no requerida)'),
         }
 
 
-class ClaseForm(forms.ModelForm):
+class CursoForm(forms.ModelForm):
     class Meta:
-        model = Clase
+        model = Curso
         fields = '__all__'
         labels = {
             'gradoEducacion': _('Grado Educacion'),
-            'curso': _('Año Curso (EJ: 1, 2)'),
+            'anio': _('Año Curso (EJ: 1, 2)'),
             'letra': _('Letra Curso (EJ: A, B'),
-            'asignaturas': _('Asignaturas que cursa la clase (selecciona varias manteniendo CTRL)'),
         }
 
 

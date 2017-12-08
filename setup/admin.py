@@ -2,9 +2,6 @@ from django.contrib import admin
 
 from .models import *
 
-# Register your models here.
-admin.site.register(Asignatura)
-
 
 @admin.register(Profesor)
 class ProfesorAdmin(admin.ModelAdmin):
@@ -12,16 +9,23 @@ class ProfesorAdmin(admin.ModelAdmin):
         'nombre',
         'apellido',
         'email',
-        'asignaturaPrincipal',
-        'asignaturaSecundaria'
     )
 
 
-@admin.register(Clase)
-class ClaseAdmin(admin.ModelAdmin):
+@admin.register(Curso)
+class CursoAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
         'tutor'
+    )
+
+
+@admin.register(Asignatura)
+class AsignaturaAdmin(admin.ModelAdmin):
+    list_display = (
+        'concepto',
+        'profesor',
+        'curso'
     )
 
 
@@ -32,5 +36,5 @@ class AlumnoAdmin(admin.ModelAdmin):
         'apellido',
         'edad',
         'email',
-        'clase'
+        'curso'
     )
