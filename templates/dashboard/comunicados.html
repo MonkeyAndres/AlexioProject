@@ -1,0 +1,34 @@
+<div class="comunicados">
+	<h2>Comunicados</h2>
+	<div id="comunicadoContainer">
+		{% for comunicado in allComunicados %}
+			{% if alumno in comunicado.alumnosLeido.all %}
+			<article class="True">
+			{% else %}
+			<article class="False">
+			{% endif %}
+				<div class="circle-image">
+					<img src="/{{ comunicado.emisor.foto }}">
+				</div>
+				<section>
+					<h3><a href="{{ comunicado.pk }}">{{ comunicado.titulo }}</a></h3>
+					<p>{{ comunicado.emisor }}</p>
+				</section>
+			</article>
+		{% endfor %}
+	</div>
+	
+	
+
+	{% if numeroPaginas %}
+		<div id="paginationContainer">
+			{% for n in numeroPaginas %}
+				{% if n|stringformat:"i" == request.GET.page %}
+					<a href="/comunicados/?page={{n}}" class="selected">{{n}}</a>
+				{% else %}
+					<a href="/comunicados/?page={{n}}">{{n}}</a>
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+</div>

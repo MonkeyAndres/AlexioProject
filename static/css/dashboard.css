@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+    outline: none;
+    line-height: 1.5;
+}
+
+nav {
+    background-color: #F44336;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    padding: 0 2em;
+}
+
+nav > a {
+    font-size: 32px;
+    color: #fafafa;
+}
+
+nav > h1 {
+    font-weight: normal;
+    font-size: 32px;
+    color: #fafafa;
+}
+
+nav > div, .circle-image{
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    background-color: white
+}
+
+img {
+    width: auto;
+    height: 100%;
+}
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2em auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+main > div {
+    display: flex;
+    flex-direction: column;
+}
+
+#cardContainer{
+    width: 40%;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: normal;
+}
+
+.indicator {
+    background-color: #fafafa;
+    color: #333;
+    width: 30px;
+    height: 30px;
+    font-size: 1.3em;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}
+
+.itemContainer {
+    margin-top: 1em;
+}
+
+.itemContainer > a {
+    display: block;
+    width: 100%;
+    padding: 0.6em;
+    background-color: #fafafa;
+    color: #333;
+    border-radius: 2px;
+    text-decoration: none;
+    margin-bottom: 0.6em;
+}
+
+.itemContainer > a:hover {
+    background-color: #eee;
+}
+
+.comunicados {
+    width: 100%;
+    background-color: #009688;
+    padding: 1em;
+    color: #fafafa;
+    border-radius: 2px;
+}
+
+main > .cal {
+    width: 58%;
+    background-color: #1E88E5;
+    padding: 1em;
+    color: #fafafa;
+    border-radius: 2px;
+}
+
+.deberes {
+    margin-top: 1em;
+    width: 100%;
+    background-color: #8E24AA;
+    padding: 1em;
+    color: #fafafa;
+    border-radius: 2px;
+}
+
+aside {
+    position: fixed;
+    top: 0;
+    left: -360px;
+    width: 360px;
+    height: 100vh;
+    background-color: #fafafa;
+    z-index: 200;
+    overflow: auto;
+    transition: left 200ms ease-in;
+}
+
+aside > .head {
+    background-color: #607D8B;
+    padding: 1em;
+    color: #fafafa;
+}
+
+.head > div {
+    height: 70px;
+    width: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    background-color: white
+}
+
+.body > a {
+    display: block;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.body > a.selected {
+    background-color: lightgrey;
+}
+
+.body > .div {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+#shadow{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgba(0,0,0,.6);
+    pointer-events: none;
+    display: none;
+    z-index: 100;
+    transition: display 400ms ease-out;
+}
+
+#calendar{
+    padding: 1em;
+    margin: auto;
+    margin-top: 1em;
+    background-color: #f5f5f5;
+    color: #333;
+    border-radius: 2px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1060px) {
+    #cardContainer{width: 100%;}
+    main>.cal{
+        width: 100%;
+        margin-top: 1em;
+    }
+    aside{
+        width: 300px;
+        left: -300px
+    }
+}

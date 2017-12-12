@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Profesor(models.Model):
-    foto = models.ImageField(blank=True, upload_to="static/profesorPhotos/")
+    foto = models.ImageField(blank=True, upload_to="static/profesorPhotos/", default="static/alumnoPhotos/default-profile.png  ")
 
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -68,11 +68,11 @@ class Asignatura(models.Model):
         verbose_name_plural = "Asignaturas"
 
     def __str__(self):
-        return self.concepto
+        return self.concepto + " - " + self.curso.__str__()
 
 
 class Alumno(models.Model):
-    foto = models.ImageField(blank=True, upload_to="static/alumnoPhotos/")
+    foto = models.ImageField(blank=True, upload_to="static/alumnoPhotos/", default="static/alumnoPhotos/default-profile.png  ")
 
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -90,4 +90,4 @@ class Alumno(models.Model):
         verbose_name_plural = "Alumnos"
 
     def __str__(self):
-        return self.nombre + " " + self.apellido + " " + self.clase.__str__()
+        return self.nombre + " " + self.apellido + " " + self.curso.__str__()

@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+    
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+
+    {% if templateStyle == "dashboard" %}
+        <link rel="stylesheet" href="{% static "css/fullcalendar.min.css" %}">
+        
+        <script src="{% static "js/jquery.min.js" %}"></script>
+        <script src="{% static "js/moment.min.js" %}"></script>
+        <script src="{% static "js/fullcalendar.min.js" %}"></script>
+
+    {% elif templateStyle == "comunicados" or templateStyle == "comunicado" %}
+        <link rel="stylesheet" href="{% static "css/comunicados.css" %}">
+    {% endif %}
+</head>
+
+<body>
+    <div id="container">
+        <nav>
+            <a class="mdi mdi-menu" href="#" id="menu"></a>
+            <h1>{{ templateStyle|title }}</h1>
+            <div><img src="/{{ alumno.foto }}"></div>
+        </nav>
+        
+        <main>
+
+            {% if templateStyle == "dashboard" %}
+                {% include "./dashboard/default.html" %}
+            {% elif templateStyle == "comunicados" %}
+                {% include "./dashboard/comunicados.html" %}
+            {% elif templateStyle == "comunicado" %}
+                {% include "./dashboard/leerComunicado.html" %}
+            {% endif %}
+
+        </main>
+    </div>
+    
+    <aside id="sidebar">
+        <div class="head">
+            <div><img src="/{{ alumno.foto }}" alt=""></div>
+            <h3>{{ alumno.nombre }} {{ alumno.apellido }}</h3>
+            <p>Curso {{ alumno.curso }}</p>
+        </div>
+        <div class="body">
+            {% if templateStyle == "dashboard" %}
+                <a href="/" class="selected">Principal</a>
+            {% else %}
+                <a href="/">Principal</a>
+            {% endif %}
+
+            <div class="div"></div>
+
+            {% if templateStyle == "comunicados" %}
+                <a href="/comunicados" class="selected">Comunicados</a>
+            {% else %}
+                <a href="/comunicados">Comunicados</a>
+            {% endif %}
+
+            {% if templateStyle == "deberes" %}
+                <a href="/deberes" class="selected">Deberes</a>
+            {% else %}
+                <a href="/deberes">Deberes</a>
+            {% endif %}
+
+            {% if templateStyle == "calendario" %}
+                <a href="/calendario" class="selected">Calendario</a>
+            {% else %}
+                <a href="/calendario">Calendario</a>
+            {% endif %}
+
+            <div class="div"></div>
+
+            {% if templateStyle == "mi clase" %}
+                <a href="/clase" class="selected">Mi Clase</a>
+            {% else %}
+                <a href="/clase">Mi Clase</a>
+            {% endif %}
+
+            {% if templateStyle == "profesores" %}
+                <a href="/profesores" class="selected">Profesores</a>
+            {% else %}
+                <a href="/profesores">Profesores</a>
+            {% endif %}
+
+            <div class="div"></div>
+
+            {% if templateStyle == "configuracion" %}
+                <a href="/configuracion" class="selected">Configuracion</a>
+            {% else %}
+                <a href="/configuracion">Configuracion</a>
+            {% endif %}
+
+            <a href="/login/exit">Salir</a>
+        </div>
+    </aside>
+    <div id="shadow"></div>
+    
+    {% if templateStyle == "dashboard" %}
+        <script src="{% static "js/es.js" %}"></script>
+        <script src="{% static "js/calendar.js" %}"></script>
+    {% endif %}
+    <script src="{% static "js/dashboardStyle.js" %}"></script>
+</body>
+
+</html>

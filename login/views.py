@@ -16,13 +16,13 @@ def loginMain(request):
     else:
         if 'token' in request.session:
             token = request.session["token"]
-            response = comprobarToken(token, request)
+            response = comprobarSesion(token, request)
             return response
         else:
             return render(request, "login.html")
 
 
-def comprobarToken(token, req):
+def comprobarSesion(token, req):
     if isTokenAlumno(token) or isTokenProfesor(token):
         response = redirect("/")
     else:
@@ -128,3 +128,8 @@ def logIn(userObject, password, request):
         return response
     else:
         return render(request, "login.html", contextIncorrectPasswd)
+
+
+def logOut(request):
+    if borrarCokieToken(request):
+        return redirect("/login")

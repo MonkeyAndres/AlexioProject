@@ -1,0 +1,31 @@
+<div id="cardContainer">
+    <div class="comunicados">
+        <div class="cardHeader">
+            <h2>Comunicados</h2>
+            <span class="indicator">{{ comunicados|length }}</span>
+        </div>
+        {% if comunicados %}
+        <div class="itemContainer">
+            {% for c in comunicados %}
+            <a href="comunicados/{{ c.pk }}">{{ c.titulo }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="deberes">
+        <div class="cardHeader">
+            <h2>Deberes</h2>
+            <span class="indicator">1</span>
+        </div>
+        <div class="itemContainer">
+            <a href="">Hola!</a>
+        </div>
+    </div>
+</div>
+
+<div class="cal">
+    <h2>Calendario</h2>
+    <div id="calendar">
+        
+    </div>
+</div>
