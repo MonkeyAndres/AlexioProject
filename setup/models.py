@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Profesor(models.Model):
-    foto = models.ImageField(blank=True, upload_to="static/profesorPhotos/", default="static/alumnoPhotos/default-profile.png  ")
+    foto = models.ImageField(blank=True, upload_to="static/profesorPhotos/", default="static/alumnoPhotos/default-profile.png")
 
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -38,7 +38,7 @@ class Curso(models.Model):
     anio = models.DecimalField(max_digits=1, decimal_places=0)
     letra = models.CharField(max_length=1, blank=True)
 
-    tutor = models.OneToOneField(Profesor)
+    tutor = models.OneToOneField(Profesor, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Clase"
@@ -55,12 +55,14 @@ class Asignatura(models.Model):
     profesor = models.ForeignKey(
         Profesor,
         related_name="profesor",
-        default=True
+        default=True,
+        on_delete=models.CASCADE
     )
     curso = models.ForeignKey(
         Curso,
         related_name="clase",
-        default=True
+        default=True,
+        on_delete=models.CASCADE
     )
 
     class Meta:
@@ -83,7 +85,7 @@ class Alumno(models.Model):
     password = models.CharField(max_length=20)
     token = models.CharField(max_length=40)
 
-    curso = models.ForeignKey(Curso, default=True)
+    curso = models.ForeignKey(Curso, default=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Alumno"
