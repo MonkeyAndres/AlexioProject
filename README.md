@@ -7,7 +7,7 @@ An open sorce school manager.
 ```bash
 git clone https://github.com/MonkeyAndres/AlexioProject.git
 cd AlexioProject
-source env/bin/activate
+sudo pip install -r requirements.txt
 python manage.py runserver
 
 # In your browser 127.0.0.1:8000
