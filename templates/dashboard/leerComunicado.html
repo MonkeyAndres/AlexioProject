@@ -1,0 +1,14 @@
+<div id="leerComunicado">
+	<h2>{{ comunicado.titulo }}</h2>
+	<section>{{ comunicado.cuerpo }}</section>
+
+	{% if documentos %}
+		<h3>Archivos Adjuntos</h3>
+		{% for doc in documentos %}
+			<a href="/{{doc.file.name}}">
+			- {{doc.nombreDocumento}} - {{doc.file.size|filesizeformat}}
+			</a>
+		{% endfor %}
+	{% endif %}
+	<p>Enviado por {{ comunicado.emisor }}</p>
+</div>
