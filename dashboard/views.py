@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from login.views import isTokenAlumno, isTokenProfesor
 from comunicados.views import obtenerToken, obtenerAlumnoByToken
 from comunicados.views import obtenerComunicadosDashboard
+from deberes.views import obtenerTrabajosDashboard
 
 
 def MainView(request):
@@ -25,15 +26,17 @@ def MainViewGet(request):
 def dashboardAlumno(token, req):
     alumno = obtenerAlumnoByToken(token)
     comunicados = obtenerComunicadosDashboard(alumno)
+    deberes = obtenerTrabajosDashboard(alumno)
     # Add there deberes and eventos
-    context = buildContext(alumno, comunicados)
+    context = buildContext(alumno, comunicados, deberes)
     return render(req, "dashboard.html", context)
 
 
-def buildContext(alumno, comunicados):
+def buildContext(alumno, comunicados, deberes):
     context = {
         "templateStyle": "dashboard",
         "alumno": alumno,
         "comunicados": comunicados,
+        "deberes": deberes
     }
     return context

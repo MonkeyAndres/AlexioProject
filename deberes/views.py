@@ -9,22 +9,26 @@ from .models import Trabajo, EntregaTrabajoOnline
 def TrabajosView(request):
     token = obtenerToken(request)
     alumno = obtenerAlumnoByToken(token)
-    trabajos = obtenerTrabajos(alumno)
+    trabajos = obtenerTrabajos(alumno, "all")
     contexto = crearContexto(trabajos)
     # return render(request, "dashboard.html", contexto)
     return HttpResponse(trabajos)
 
 
-def obtenerTrabajos(alumno):
-    trabajosActuales = obtenerTrabajosActuales()
-    trabajosAlumno = filtrarTrabajosAlumno(trabajosActuales, alumno)
-    trabajosNoEntregados = filtrarTrabajosSinEntrega(trabajosAlumno, alumno)
-    return trabajosNoEntregados
+def obtenerTrabajos(alumno, modelo):
+    trabajosActuales = obtenerTrabajosActuales(alumno)
+
+    if modelo == "dashboard":
+        trabajosNoEntregados = filtrarTrabajosSinEntrega(trabajosActuales, alumno)
+        return trabajosNoEntregados
+    else:
+        return trabajosActuales
 
 
-def obtenerTrabajosActuales():
+def obtenerTrabajosActuales(alumno):
     trabajosActuales = Trabajo.objects.filter(fechaEntrega__gte=timezone.now())
-    return trabajosActuales
+    trabajosFiltrados = filtrarTrabajosAlumno(trabajosActuales, alumno)
+    return trabajosFiltrados
 
 
 def filtrarTrabajosAlumno(trabajosActuales, alumno):
@@ -56,3 +60,8 @@ def existEntrega(trabajo, alumno):
 
 def crearContexto(trabajos):
     pass
+
+
+def obtenerTrabajosDashboard(alumno):
+    trabajos = obtenerTrabajos(alumno, "dashboard")
+    return trabajos

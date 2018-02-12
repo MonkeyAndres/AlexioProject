@@ -8,12 +8,6 @@ from setup.models import Alumno, Profesor
 
 
 def ComunicadosView(request):
-    if request.method == "GET":
-        response = ComunicadosGET(request)
-    return response
-
-
-def ComunicadosGET(request):
     token = obtenerToken(request)
 
     if isTokenAlumno(token):

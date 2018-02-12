@@ -15,11 +15,15 @@
     <div class="deberes">
         <div class="cardHeader">
             <h2>Deberes</h2>
-            <span class="indicator">1</span>
+            <span class="indicator">{{ deberes|length }}</span>
         </div>
+        {% if deberes %}
         <div class="itemContainer">
-            <a href="">Hola!</a>
+            {% for d in deberes %}
+            <a href="deberes/{{ d.pk }}">{{ d.concepto }} - {{ d.asignatura.concepto }}</a>
+            {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
 
