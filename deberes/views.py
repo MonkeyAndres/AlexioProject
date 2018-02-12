@@ -10,9 +10,8 @@ def TrabajosView(request):
     token = obtenerToken(request)
     alumno = obtenerAlumnoByToken(token)
     trabajos = obtenerTrabajos(alumno, "all")
-    contexto = crearContexto(trabajos)
-    # return render(request, "dashboard.html", contexto)
-    return HttpResponse(trabajos)
+    contexto = crearContexto(trabajos, alumno)
+    return render(request, "dashboard.html", contexto)
 
 
 def obtenerTrabajos(alumno, modelo):
@@ -58,8 +57,13 @@ def existEntrega(trabajo, alumno):
         return False
 
 
-def crearContexto(trabajos):
-    pass
+def crearContexto(trabajos, alumno):
+    context = {
+        "allDeberes": trabajos,
+        "templateStyle": "deberes",
+        "alumno": alumno
+    }
+    return context
 
 
 def obtenerTrabajosDashboard(alumno):

@@ -4,6 +4,7 @@
             <h2>Comunicados</h2>
             <span class="indicator">{{ comunicados|length }}</span>
         </div>
+
         {% if comunicados %}
         <div class="itemContainer">
             {% for c in comunicados %}
@@ -11,19 +12,31 @@
             {% endfor %}
         </div>
         {% endif %}
+
     </div>
+
+
     <div class="deberes">
         <div class="cardHeader">
             <h2>Deberes</h2>
             <span class="indicator">{{ deberes|length }}</span>
         </div>
+
         {% if deberes %}
         <div class="itemContainer">
             {% for d in deberes %}
-            <a href="deberes/{{ d.pk }}">{{ d.concepto }} - {{ d.asignatura.concepto }}</a>
+                {% if d.online %}
+                <a href="deberes/{{ d.pk }}">
+                {% else %}
+                <a href="#">
+                {% endif %}
+                    <b>{{ d.concepto }}</b>
+                    <p>{{ d.asignatura.concepto }}</p>
+                </a>
             {% endfor %}
         </div>
         {% endif %}
+
     </div>
 </div>
 

@@ -127,6 +127,11 @@ main > .cal {
     border-radius: 2px;
 }
 
+.deberes>.itemContainer>a{
+    display: flex;
+    justify-content: space-between;
+}
+
 aside {
     position: fixed;
     top: 0;
