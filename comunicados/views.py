@@ -149,7 +149,7 @@ def buildComunicadoContext(token, comunicado):
 
 
 def obtenerDocumentos(comunicado):
-    documentos = DocumentoComunicado.objects.filter(comunicado=comunicado)
+    documentos = AdjuntoComunicado.objects.filter(comunicado=comunicado)
     return documentos
 
 

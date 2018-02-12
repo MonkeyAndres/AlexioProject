@@ -12,4 +12,4 @@ class ComunicadoAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(DocumentoComunicado)
+admin.site.register(AdjuntoComunicado)

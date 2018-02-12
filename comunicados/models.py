@@ -23,7 +23,7 @@ class Comunicado(models.Model):
         return self.titulo + " - " + self.emisor.__str__()
 
 
-class DocumentoComunicado(models.Model):
+class AdjuntoComunicado(models.Model):
     nombreDocumento = models.CharField(max_length=255, default="NombreArchivo")
     file = models.FileField(upload_to="static/documents")
     comunicado = models.ForeignKey(
@@ -33,8 +33,8 @@ class DocumentoComunicado(models.Model):
     )
 
     class Meta:
-        verbose_name = "Documento Comunicado"
-        verbose_name_plural = "Documento Comunicados"
+        verbose_name = "Adjunto Comunicado"
+        verbose_name_plural = "Adjuntos Comunicados"
 
     def __str__(self):
         return self.nombreDocumento
